@@ -17,7 +17,7 @@ Simply add the following line to your `composer.json` and run install/update:
 
 You should keep your Paymill api keys in a dot file. For more information read [Protecting Sensitive Configuration](http://laravel.com/docs/configuration#protecting-sensitive-configuration) for detailed instructions.
 
-```
+```php
 <?php
 return array(
   'laravel-paymill' => array(
@@ -33,7 +33,7 @@ Alternatively you can choose to publish the package config files to configure yo
 
 You will also need to add the service provider and the facade alias to your `app/config/app.php`:
 
-```
+```php
 'providers' => array(
   'Speakman\LaravelPaymill\LaravelPaymillServiceProvider'
 )
@@ -51,7 +51,7 @@ Please see the [Paymill PHP API](https://developers.paymill.com/en/reference/api
 
 https://developers.paymill.com/en/reference/api-reference/index.html#document-payments
 
-```
+```php
 try {
 
     Paymill::Payment()->create('098f6bcd4621d373cade4e832627b4f6');
@@ -65,15 +65,15 @@ try {
 }
 ```
 
-```
+```php
 Paymill::Payment('pay_3af44644dd6d25c820a8')->details();
 ```
 
-```
+```php
 Paymill::Payment('pay_3af44644dd6d25c820a8')->delete();
 ```
 
-```
+```php
 Paymill::Payment()->all();
 ```
 
@@ -81,7 +81,7 @@ Paymill::Payment()->all();
 
 https://developers.paymill.com/en/reference/api-reference/index.html#document-transactions
 
-```
+```php
 Paymill::Transaction()
     ->setAmount(4200)
     ->setCurrency('EUR')
@@ -90,7 +90,7 @@ Paymill::Transaction()
     ->create();
 ```
 
-```
+```php
 Paymill::Transaction('pay_2f82a672574647cd911d')
     ->setDescription('My updated transaction description');
     ->update();
@@ -100,14 +100,14 @@ Paymill::Transaction('pay_2f82a672574647cd911d')
 
 https://developers.paymill.com/en/reference/api-reference/index.html#document-clients
 
-```
+```php
 Paymill::Client()
     ->setEmail('max.mustermann@example.com')
     ->setDescription('Lovely Client')
     ->create();
 ```
 
-```
+```php
 Paymill::Client('client_8127a65bf3c84676c918')
     ->setEmail('updated-client@example.com')
     ->setDescription('Updated Client');
@@ -118,7 +118,7 @@ Paymill::Client('client_8127a65bf3c84676c918')
 
 https://developers.paymill.com/en/reference/api-reference/index.html#document-preauthorizations
 
-```
+```php
 Paymill::Preauthorization()
     ->setToken('098f6bcd4621d373cade4e832627b4f6')
     ->setAmount(4200)
@@ -131,7 +131,7 @@ Paymill::Preauthorization()
 
 https://developers.paymill.com/en/reference/api-reference/index.html#document-refunds
 
-```
+```php
 Paymill::Refund('tran_023d3b5769321c649435')
     ->setAmount(4200)
     ->setDescription('Sample Description');
@@ -142,7 +142,7 @@ Paymill::Refund('tran_023d3b5769321c649435')
 
 https://developers.paymill.com/en/reference/api-reference/index.html#document-offers
 
-```
+```php
 Paymill::Offer()
     ->setAmount(4200)
     ->setCurrency('EUR')
@@ -151,7 +151,7 @@ Paymill::Offer()
     ->create();
 ```
 
-```
+```php
 Paymill::Offer('offer_40237e20a7d5a231d99b')
     ->setName('Extended Special')
     ->setInterval('1 MONTH')
@@ -162,7 +162,7 @@ Paymill::Offer('offer_40237e20a7d5a231d99b')
     ->update();
 ```
 
-```
+```php
 Paymill::Offer('pay_3af44644dd6d25c820a8')
     ->removeWithSubscriptions(true);
     ->delete();
@@ -172,7 +172,7 @@ Paymill::Offer('pay_3af44644dd6d25c820a8')
 
 https://developers.paymill.com/en/reference/api-reference/index.html#document-subscriptions
 
-```
+```php
 Paymill::Subscription()
     ->setClient('client_81c8ab98a8ac5d69f749')
     ->setAmount(3000);
@@ -185,7 +185,7 @@ Paymill::Subscription()
     ->create();
 ```
 
-```
+```php
 Paymill::Subscription('sub_dea86e5c65b2087202e3')
     ->setClient('client_81c8ab98a8ac5d69f749')
     ->setOffer('offer_40237e20a7d5a231d99b');
@@ -199,7 +199,7 @@ Paymill::Subscription('sub_dea86e5c65b2087202e3')
     ->update();
 ```
 
-```
+```php
 Paymill::Subscription('sub_dea86e5c65b2087202e3')
     ->setRemove(false);
     ->delete();
@@ -209,7 +209,7 @@ Paymill::Subscription('sub_dea86e5c65b2087202e3')
 
 You can use the `$paymill_public_key` variable across all blade views.
 
-```
+```php
 <script type="text/javascript">
   var PAYMILL_PUBLIC_KEY = '{{ $paymill_public_key }}';
 </script>  
