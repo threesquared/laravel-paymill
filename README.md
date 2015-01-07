@@ -209,7 +209,7 @@ Paymill::Subscription('sub_dea86e5c65b2087202e3')
 
 You can use the `$paymill_public_key` variable across all blade views.
 
-```php
+```html
 <script type="text/javascript">
   var PAYMILL_PUBLIC_KEY = '{{ $paymill_public_key }}';
 </script>  
