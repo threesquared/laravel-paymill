@@ -1,6 +1,7 @@
 {
     "name": "speakman/laravel-paymill",
     "description": "Laravel wrapper for the Paymill API",
+    "keywords": ["laravel", "package", "paymill", "payments", "billing",],
     "license": "MIT",
     "authors": [
         {
