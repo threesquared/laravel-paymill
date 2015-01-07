@@ -1,0 +1,25 @@
+{
+    "name": "speakman/laravel-paymill",
+    "description": "Laravel wrapper for the Paymill API",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ben Speakman",
+            "email": "ben@d-formed.net"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*",
+        "paymill/paymill": "dev-master"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-0": {
+            "Speakman\\LaravelPaymill\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
