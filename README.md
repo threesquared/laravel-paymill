@@ -15,7 +15,7 @@ Simply add the following line to your `composer.json` and run install/update:
 
 ## Configuration
 
-You should keep your Paymill api keys in a dot file. For more information read [Protecting Sensitive Configuration](http://laravel.com/docs/configuration#protecting-sensitive-configuration) for detailed instructions.
+You should keep your Paymill api keys in a dot file. For more information read [Protecting Sensitive Configuration](http://laravel.com/docs/configuration#protecting-sensitive-configuration).
 
 ```php
 <?php
@@ -45,16 +45,58 @@ You will also need to add the service provider and the facade alias to your `app
 
 ### Usage
 
-Please see the [Paymill PHP API](https://developers.paymill.com/en/reference/api-reference/index.html) for full documentation on all available entities and methods. The `create()`, `details()`, `delete()` and `all()` methods are available for all entities. Extra functions can be chained on to add extra information to create and update requests.
+*Please see the [Paymill PHP API](https://developers.paymill.com/en/reference/api-reference/index.html) for full documentation on all available entities, actions and methods.*
 
-#### Payments
+First start with instantiating the Paymill entity you want to work with.
 
-https://developers.paymill.com/en/reference/api-reference/index.html#document-payments
+```php
+$transaction = Paymill:Transaction();
+```
+
+Available entities are:
+
+* [Payment](https://developers.paymill.com/en/reference/api-reference/index.html#document-payments)
+* [Transaction](https://developers.paymill.com/en/reference/api-reference/index.html#document-transactions)
+* [Client](https://developers.paymill.com/en/reference/api-reference/index.html#document-clients)
+* [Preauthorization](https://developers.paymill.com/en/reference/api-reference/index.html#document-preauthorizations)
+* [Refund](https://developers.paymill.com/en/reference/api-reference/index.html#document-refunds)
+* [Offer](https://developers.paymill.com/en/reference/api-reference/index.html#document-offers)
+* [Subscription](https://developers.paymill.com/en/reference/api-reference/index.html#document-subscriptions)
+
+Then add in any additional information the request requires with setter methods.
+
+```php
+$transaction->setAmount(4200)
+    ->setCurrency('EUR')
+    ->setPayment('pay_2f82a672574647cd911d')
+    ->setDescription('Test Transaction');
+```
+
+Finally chose which action you want to perform.
+
+```php
+$transaction->create();
+```
+
+Available actions are:
+
+* create()
+* details()
+* update()
+* all()
+* delete()
+
+So an example to create a transaction would be:
 
 ```php
 try {
 
-    Paymill::Payment()->create('098f6bcd4621d373cade4e832627b4f6');
+    Paymill::Transaction()
+        ->setAmount(4200)
+        ->setCurrency('EUR')
+        ->setPayment('pay_2f82a672574647cd911d')
+        ->setDescription('Test Transaction');
+        ->create();
 
 } catch(PaymillException $e) {
 
@@ -65,149 +107,19 @@ try {
 }
 ```
 
-```php
-Paymill::Payment('pay_3af44644dd6d25c820a8')->details();
-```
+You can set the ID of an entity by passing it as an argument.
 
 ```php
-Paymill::Payment('pay_3af44644dd6d25c820a8')->delete();
+Paymill::Client('client_8127a65bf3c84676c918')->details();
 ```
+
+Payment create can also take the token as an argument.
 
 ```php
-Paymill::Payment()->all();
+Paymill::Payment()->create('098f6bcd4621d373cade4e832627b4f6');
 ```
 
-#### Transactions
-
-https://developers.paymill.com/en/reference/api-reference/index.html#document-transactions
-
-```php
-Paymill::Transaction()
-    ->setAmount(4200)
-    ->setCurrency('EUR')
-    ->setPayment('pay_2f82a672574647cd911d')
-    ->setDescription('Test Transaction');
-    ->create();
-```
-
-```php
-Paymill::Transaction('pay_2f82a672574647cd911d')
-    ->setDescription('My updated transaction description');
-    ->update();
-```
-
-#### Clients
-
-https://developers.paymill.com/en/reference/api-reference/index.html#document-clients
-
-```php
-Paymill::Client()
-    ->setEmail('max.mustermann@example.com')
-    ->setDescription('Lovely Client')
-    ->create();
-```
-
-```php
-Paymill::Client('client_8127a65bf3c84676c918')
-    ->setEmail('updated-client@example.com')
-    ->setDescription('Updated Client');
-    ->update();
-```
-
-#### Preauthorizations
-
-https://developers.paymill.com/en/reference/api-reference/index.html#document-preauthorizations
-
-```php
-Paymill::Preauthorization()
-    ->setToken('098f6bcd4621d373cade4e832627b4f6')
-    ->setAmount(4200)
-    ->setCurrency('EUR')
-    ->setDescription('description example');
-    ->create();
-```
-
-#### Refunds
-
-https://developers.paymill.com/en/reference/api-reference/index.html#document-refunds
-
-```php
-Paymill::Refund('tran_023d3b5769321c649435')
-    ->setAmount(4200)
-    ->setDescription('Sample Description');
-    ->create();
-```
-
-#### Offers
-
-https://developers.paymill.com/en/reference/api-reference/index.html#document-offers
-
-```php
-Paymill::Offer()
-    ->setAmount(4200)
-    ->setCurrency('EUR')
-    ->setInterval('1 WEEK')
-    ->setName('Nerd Special');
-    ->create();
-```
-
-```php
-Paymill::Offer('offer_40237e20a7d5a231d99b')
-    ->setName('Extended Special')
-    ->setInterval('1 MONTH')
-    ->setAmount(3333)
-    ->setCurrency('USD')
-    ->setTrialPeriodDays(33)
-    ->updateSubscriptions(true);
-    ->update();
-```
-
-```php
-Paymill::Offer('pay_3af44644dd6d25c820a8')
-    ->removeWithSubscriptions(true);
-    ->delete();
-```
-
-#### Subscriptions
-
-https://developers.paymill.com/en/reference/api-reference/index.html#document-subscriptions
-
-```php
-Paymill::Subscription()
-    ->setClient('client_81c8ab98a8ac5d69f749')
-    ->setAmount(3000);
-    ->setPayment('pay_5e078197cde8a39e4908f8aa');
-    ->setCurrency('EUR');
-    ->setInterval('1 week,monday');
-    ->setName('Example Subscription');
-    ->setPeriodOfValidity('2 YEAR');
-    ->setStartAt('1400575533');
-    ->create();
-```
-
-```php
-Paymill::Subscription('sub_dea86e5c65b2087202e3')
-    ->setClient('client_81c8ab98a8ac5d69f749')
-    ->setOffer('offer_40237e20a7d5a231d99b');
-    ->setAmount(3000);
-    ->setPayment('pay_95ba26ba2c613ebb0ca8');
-    ->setCurrency('USD');
-    ->setInterval('1 month,friday');
-    ->setName('Changed Subscription');
-    ->setPeriodOfValidity('14 MONTH');
-    ->setTrialEnd(false);
-    ->update();
-```
-
-```php
-Paymill::Subscription('sub_dea86e5c65b2087202e3')
-    ->setRemove(false);
-    ->delete();
-```
-
-#### Views
-
-You can use the `$paymill_public_key` variable across all blade views.
+You can also use the `$paymill_public_key` variable across all blade views.
 
 ```html
 <script type="text/javascript">
