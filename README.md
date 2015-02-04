@@ -1,11 +1,13 @@
 Laravel Paymill
 =======
 
-Laravel Paymill is a Laravel specific wrapper for the [Paymill PHP](https://github.com/paymill/paymill-php) library.
+Laravel Paymill is a Laravel 5 specific wrapper for the [Paymill PHP](https://github.com/paymill/paymill-php) library.
 
 - [Install](#install)
 - [Configuration](#configuration)
 - [Usage](#usage)
+
+**Please use the 1.0.0 release for Laravel 4**
 
 ## Install
 
