@@ -95,7 +95,7 @@ try {
         ->setAmount(4200)
         ->setCurrency('EUR')
         ->setPayment('pay_2f82a672574647cd911d')
-        ->setDescription('Test Transaction');
+        ->setDescription('Test Transaction')
         ->create();
 
 } catch(PaymillException $e) {
