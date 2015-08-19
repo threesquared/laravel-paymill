@@ -19,12 +19,14 @@ class LaravelPaymillServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->publishes([
-            __DIR__.'/../../config/config.php' => config_path('paymill.php'),
-        ]);
+			__DIR__.'/../../config/config.php' => config_path('paymill.php'),
+		]);
 
-        $public_key = config('paymill.public_key');
+		$env = env('PAYMILL_ENV', 'test');
 
-        $this->app['view']->share('paymill_public_key', $public_key);
+		$public_key = config('paymill.' . $env . '.public_key');
+
+		$this->app['view']->share('paymill_public_key', $public_key);
 	}
 
 	/**
@@ -37,11 +39,13 @@ class LaravelPaymillServiceProvider extends ServiceProvider {
 
 		$this->app['paymill'] = $this->app->share(function ($app) {
 
-            $private_key = config('paymill.private_key');
+			$env = env('PAYMILL_ENV', 'test');
 
-            return new Paymill($private_key);
-            
-        });
+			$private_key = config('paymill.' . $env . '.private_key');
+
+			return new Paymill($private_key);
+			
+		});
 
 	}
 

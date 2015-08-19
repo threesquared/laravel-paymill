@@ -33,6 +33,12 @@ You will also need to add the service provider and the facade alias to your `app
 ),
 ```
 
+By default the package will use your test keys. In order to use the live Paymill keys you need to set the `PAYMILL_ENV` enviroment variable.
+
+```
+PAYMILL_ENV=live
+```
+
 ### Usage
 
 *Please see the [Paymill PHP API](https://developers.paymill.com/en/reference/api-reference/index.html) for full documentation on all available entities, actions and methods.*
