@@ -13,7 +13,7 @@ Laravel Paymill is a Laravel 5 specific wrapper for the [Paymill PHP](https://gi
 
 Simply add the following line to your `composer.json` and run install/update:
 
-    "speakman/laravel-paymill": "~1.1"
+    "speakman/laravel-paymill": "~1.2"
 
 ## Configuration
 
