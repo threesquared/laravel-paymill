@@ -1,6 +1,8 @@
 Laravel Paymill
 =======
 
+[![Build Status](https://travis-ci.org/threesquared/laravel-paymill.svg?branch=master)](https://travis-ci.org/threesquared/laravel-paymill)
+
 Laravel Paymill is a Laravel 5 specific wrapper for the [Paymill PHP](https://github.com/paymill/paymill-php) library.
 
 - [Install](#install)
@@ -13,7 +15,7 @@ Laravel Paymill is a Laravel 5 specific wrapper for the [Paymill PHP](https://gi
 
 Simply add the following line to your `composer.json` and run install/update:
 
-    "speakman/laravel-paymill": "~1.2"
+    "speakman/laravel-paymill": "~1.3"
 
 ## Configuration
 
@@ -21,15 +23,15 @@ Publish the package config files to configure your api keys:
 
     php artisan vendor:publish
 
-You will also need to add the service provider and the facade alias to your `app/config/app.php`:
+You will also need to add the service provider and the facade alias to your `config/app.php`:
 
 ```php
 'providers' => array(
-  'Speakman\LaravelPaymill\LaravelPaymillServiceProvider'
+  Speakman\LaravelPaymill\LaravelPaymillServiceProvider::class
 )
 
 'aliases' => array(
-  'Paymill' => 'Speakman\LaravelPaymill\Facades\Paymill'
+  'Paymill'   => Speakman\LaravelPaymill\Facades\Paymill::class
 ),
 ```
 
@@ -41,23 +43,23 @@ PAYMILL_ENV=live
 
 ### Usage
 
-*Please see the [Paymill PHP API](https://developers.paymill.com/en/reference/api-reference/index.html) for full documentation on all available entities, actions and methods.*
+*Please see the [Paymill API](https://developers.paymill.com/API/index) for full documentation on all available entities, actions and methods.*
 
 First start with instantiating the Paymill entity you want to work with.
 
 ```php
-$transaction = Paymill:Transaction();
+$transaction = Paymill::Transaction();
 ```
 
 Available entities are:
 
-* [Payment](https://developers.paymill.com/en/reference/api-reference/index.html#document-payments)
-* [Transaction](https://developers.paymill.com/en/reference/api-reference/index.html#document-transactions)
-* [Client](https://developers.paymill.com/en/reference/api-reference/index.html#document-clients)
-* [Preauthorization](https://developers.paymill.com/en/reference/api-reference/index.html#document-preauthorizations)
-* [Refund](https://developers.paymill.com/en/reference/api-reference/index.html#document-refunds)
-* [Offer](https://developers.paymill.com/en/reference/api-reference/index.html#document-offers)
-* [Subscription](https://developers.paymill.com/en/reference/api-reference/index.html#document-subscriptions)
+* [Payment](https://developers.paymill.com/API/index#payments)
+* [Transaction](https://developers.paymill.com/API/index#transactions)
+* [Client](https://developers.paymill.com/API/index#clients)
+* [Preauthorization](https://developers.paymill.com/API/index#preauthorizations)
+* [Refund](https://developers.paymill.com/API/index#refunds)
+* [Offer](https://developers.paymill.com/API/index#offers)
+* [Subscription](https://developers.paymill.com/API/index#subscriptions)
 
 Then add in any additional information the request requires with setter methods.
 
@@ -99,7 +101,7 @@ try {
     $e->getResponseCode();
     $e->getStatusCode();
     $e->getErrorMessage();
-    
+
 }
 ```
 
@@ -120,5 +122,5 @@ You can also use the `$paymill_public_key` variable across all blade views.
 ```html
 <script type="text/javascript">
   var PAYMILL_PUBLIC_KEY = '{{ $paymill_public_key }}';
-</script>  
+</script>
 ```
