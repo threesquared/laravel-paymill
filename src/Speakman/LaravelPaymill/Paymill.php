@@ -4,21 +4,31 @@ use Paymill\Request;
 
 /**
  * Laravel wrapper for the Paymill API
+ *
  * @package LaravelPaymill
- * @version 1.0
- * @author Ben Speakman <ben@d-formed.net>
+ * @version 1.3
+ * @author Ben Speakman <ben@3sq.re>
  */
 class Paymill
 {
 
     /**
      * The private Paymill key
+     *
      * @var string
      */
     protected $private_key;
 
     /**
+     * The Paymill model
+     *
+     * @var Class
+     */
+    public $model;
+
+    /**
      * Constructor
+     *
      * @param string $private_key
      */
     public function __construct($private_key)
@@ -64,6 +74,7 @@ class Paymill
 
     /**
      * Create the Paymill model
+     *
      * @param string $class
      * @param string $id
      * @return mixed
@@ -81,6 +92,7 @@ class Paymill
 
     /**
      * Create method
+     *
      * @param  string   $token optional token for payment creation
      * @return Response
      */
@@ -124,15 +136,20 @@ class Paymill
 
     /**
      * Magic method to pass methods to the Paymill model
+     *
      * @param  string $name
      * @param  array  $arguments
      * @return mixed
      */
     public function __call($name, $arguments)
     {
-        call_user_func_array(array($this->model, $name), $arguments);
+        $return = call_user_func_array(array($this->model, $name), $arguments);
 
-        return $this;
+        if ($return instanceof $this->model) {
+            return $this;
+        }
+
+        return $return;
     }
 
 }
