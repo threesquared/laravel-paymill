@@ -1,4 +1,4 @@
-<?php namespace Speakman\LaravelPaymill;
+<?php namespace Threesquared\LaravelPaymill;
 
 use Illuminate\Support\ServiceProvider;
 

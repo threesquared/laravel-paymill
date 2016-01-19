@@ -1,4 +1,4 @@
-<?php namespace Speakman\LaravelPaymill\Facades;
+<?php namespace Threesquared\LaravelPaymill\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

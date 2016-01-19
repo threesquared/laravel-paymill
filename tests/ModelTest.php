@@ -1,6 +1,6 @@
 <?php
 
-use Speakman\LaravelPaymill\Paymill;
+use Threesquared\LaravelPaymill\Paymill;
 
 class FactoryTest extends PHPUnit_Framework_TestCase {
 

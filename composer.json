@@ -1,5 +1,5 @@
 {
-    "name": "speakman/laravel-paymill",
+    "name": "threesquared/laravel-paymill",
     "description": "Laravel wrapper for the Paymill API",
     "keywords": ["laravel", "package", "paymill", "payments", "billing"],
     "license": "MIT",
@@ -22,7 +22,7 @@
             "src/migrations"
         ],
         "psr-0": {
-            "Speakman\\LaravelPaymill\\": "src/"
+            "Threesquared\\LaravelPaymill\\": "src/"
         }
     },
     "minimum-stability": "stable"

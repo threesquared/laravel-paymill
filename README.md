@@ -15,7 +15,7 @@ Laravel Paymill is a Laravel 5 specific wrapper for the [Paymill PHP](https://gi
 
 Simply add the following line to your `composer.json` and run install/update:
 
-    "speakman/laravel-paymill": "~1.3"
+    "threesquared/laravel-paymill": "~1.3"
 
 ## Configuration
 
@@ -27,11 +27,11 @@ You will also need to add the service provider and the facade alias to your `con
 
 ```php
 'providers' => array(
-  Speakman\LaravelPaymill\LaravelPaymillServiceProvider::class
+  Threesquared\LaravelPaymill\LaravelPaymillServiceProvider::class
 )
 
 'aliases' => array(
-  'Paymill'   => Speakman\LaravelPaymill\Facades\Paymill::class
+  'Paymill'   => Threesquared\LaravelPaymill\Facades\Paymill::class
 ),
 ```
 
