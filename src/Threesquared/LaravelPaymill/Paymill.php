@@ -72,6 +72,11 @@ class Paymill
         return $this->createModel('Paymill\Models\Request\Subscription', $id);
     }
 
+    public function checksum($id = null)
+    {
+        return $this->createModel('Paymill\Models\Request\Checksum', $id);
+    }
+
     /**
      * Create the Paymill model
      *
@@ -123,6 +128,16 @@ class Paymill
     public function delete()
     {
         return $this->request->delete($this->model);
+    }
+
+    public function json()
+    {
+        return $this->request->getJSONObject($this->model);
+    }
+
+    public function data()
+    {
+        return $this->request->getDataAsArray($this->model);
     }
 
     /**
