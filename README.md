@@ -1,7 +1,7 @@
 Laravel Paymill
 =======
 
-[![Build Status](https://travis-ci.org/threesquared/laravel-paymill.svg?branch=master)](https://travis-ci.org/threesquared/laravel-paymill) [![Latest Stable Version](https://poser.pugx.org/threesquared/laravel-paymill/version)](https://packagist.org/packages/threesquared/laravel-paymill)
+[![Build Status](https://travis-ci.org/threesquared/laravel-paymill.svg?branch=master)](https://travis-ci.org/threesquared/laravel-paymill) [![Latest Stable Version](https://poser.pugx.org/threesquared/laravel-paymill/version)](https://packagist.org/packages/threesquared/laravel-paymill) [![Packagist](https://img.shields.io/packagist/dt/threesquared/laravel-paymill.svg?maxAge=2592000)]() [![Packagist](https://img.shields.io/packagist/l/threesquared/laravel-paymill.svg?maxAge=2592000)]()
 
 Laravel Paymill is a Laravel 5 specific wrapper for the [Paymill PHP](https://github.com/paymill/paymill-php) library.
 
